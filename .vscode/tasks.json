@@ -1,0 +1,61 @@
+{
+  // See https://go.microsoft.com/fwlink/?LinkId=733558
+  // for the documentation about the tasks.json format
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "NixOS VM: Cleanup",
+      "type": "shell",
+      "command": "cleanup",
+      "options": {
+        "cwd": "${fileDirname}",
+      },
+    },
+    {
+      "label": "NixOS VM: Build System",
+      "type": "shell",
+      "command": "build-system",
+      "options": {
+        "cwd": "${fileDirname}",
+        "env": {
+          "nixpkgs_path": "${input:nixpkgs_path}"
+        }
+      }
+    },
+    {
+      "label": "NixOS VM: Run",
+      "type": "shell",
+      "command": "run-vm",
+      "options": {
+        "cwd": "${fileDirname}",
+        "env": {
+          "nixpkgs_path": "${input:nixpkgs_path}"
+        }
+      }
+    },
+    {
+      "label": "NixOS VM: Run with bootloader",
+      "type": "shell",
+      "command": "run-vm-with-bootloader",
+      "options": {
+        "cwd": "${fileDirname}",
+        "env": {
+          "nixpkgs_path": "${input:nixpkgs_path}"
+        }
+      }
+    },
+    {
+      "label": "NixOS VM: Ssh into machine",
+      "type": "shell",
+      "command": "ssh-vm",
+    },
+  ],
+  "inputs": [
+    {
+      "id": "nixpkgs_path",
+      "type": "promptString",
+      "description": "Path to nixpkgs checkout to use.",
+      "default": "${env:nixpkgs_path}",
+    }
+  ],
+}

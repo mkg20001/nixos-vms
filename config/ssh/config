@@ -1,0 +1,8 @@
+Host vm
+    Port 2222
+    User root
+    HostName localhost
+    UserKnownHostsFile=/dev/null
+    StrictHostKeyChecking=no
+    PreferredAuthentications password
+    ChallengeResponseAuthentication no
