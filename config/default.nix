@@ -1,5 +1,5 @@
 # Global low level VM configuration
-{ modulesPath, lib, pkgs, ... }:
+{ modulesPath, lib, config, pkgs, ... }:
 
 {
   imports = [
@@ -30,7 +30,13 @@
     #"-vga qxl"
     "-vga virtio"
     "-display gtk,gl=on"
+
+    "-enable-kvm"
+    "-cpu max"
   ];
+
+  virtualisation.cores = if builtins.isInt config.nix.maxJobs then config.nix.maxJobs / 2 else 1;
+  virtualisation.memorySize = lib.mkDefault 1024;
 
   system.stateVersion = lib.mkDefault "20.03";
 }
